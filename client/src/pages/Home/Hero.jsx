@@ -825,7 +825,7 @@ const HERO_CARDS = [
     label: "Branding",
     // title: "Identity that stands out",
     animation: "fadeZoom",
-    interval: 1800,
+    interval: 1300,
     startDelay: 0,
     images: [
       "Images/Bharat - Adiyogi.png",
@@ -848,7 +848,7 @@ const HERO_CARDS = [
     label: "Content",
     // title: "Stories that create demand",
     animation: "slideHorizontal",
-    interval: 2000,
+    interval: 1300,
     startDelay: 500,
     images: [
       "Images/Bharat - Goa.png",
@@ -871,7 +871,7 @@ const HERO_CARDS = [
     label: "Growth",
     // title: "Systems that scale",
     animation: "clipReveal",
-    interval: 2200,
+    interval: 1300,
     startDelay: 1000,
     images: [
        "Images/Bharat - Payment.png",
@@ -901,19 +901,19 @@ const CARD_VARIANTS = {
     initial: { opacity: 0, scale: 1.15 },
     animate: { opacity: 1, scale: 1 },
     exit: { opacity: 0, scale: 0.95 },
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
   },
   slideHorizontal: {
     initial: { x: "100%" },
     animate: { x: "0%" },
     exit: { x: "-100%" },
-    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] },
   },
   clipReveal: {
     initial: { clipPath: "inset(0% 0% 100% 0%)", scale: 1.1 },
     animate: { clipPath: "inset(0% 0% 0% 0%)", scale: 1 },
     exit: { opacity: 1 },
-    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] },
   },
 };
 
