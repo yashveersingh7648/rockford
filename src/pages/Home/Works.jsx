@@ -429,7 +429,7 @@ function WorkImageSlider({
 
         const tl = gsap.timeline();
 
-        tl.timeScale(1.4);
+        tl.timeScale(1.8);
         
         transitionRef.current = tl;
 
