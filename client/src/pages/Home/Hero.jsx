@@ -901,19 +901,19 @@ const CARD_VARIANTS = {
     initial: { opacity: 0, scale: 1.15 },
     animate: { opacity: 1, scale: 1 },
     exit: { opacity: 0, scale: 0.95 },
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
   },
   slideHorizontal: {
     initial: { x: "100%" },
     animate: { x: "0%" },
     exit: { x: "-100%" },
-    transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
   },
   clipReveal: {
     initial: { clipPath: "inset(0% 0% 100% 0%)", scale: 1.1 },
     animate: { clipPath: "inset(0% 0% 0% 0%)", scale: 1 },
     exit: { opacity: 1 },
-    transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
   },
 };
 
