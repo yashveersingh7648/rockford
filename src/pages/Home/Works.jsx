@@ -50,7 +50,8 @@ const WORKS = [
     category: "PERSONAL BRANDING",
 
     animation: "slideHorizontal",
-    interval: 2150,
+    // interval: 2150,
+    interval: 1800,
     startDelay: 600,
 
     image:
@@ -82,7 +83,8 @@ const WORKS = [
     category: "Social Currency",
 
     animation: "slideVertical",
-    interval: 1950,
+    // interval: 1950,
+    interval: 1800,
     startDelay: 1050,
 
     image:
@@ -112,7 +114,8 @@ const WORKS = [
     category: "Content strategy",
 
     animation: "clipReveal",
-    interval: 2400,
+    // interval: 2400,
+    interval: 1800,
     startDelay: 1500,
 
     image:
@@ -150,7 +153,8 @@ const WORKS = [
     category: "SOP",
 
     animation: "rotateScale",
-    interval: 2050,
+    // interval: 2050,
+    interval: 1800,
     startDelay: 850,
 
     image:
@@ -182,7 +186,8 @@ const WORKS = [
     category: "Customer Experience",
 
     animation: "blurFade",
-    interval: 2200,
+    // interval: 2200,
+    interval: 1800,
     startDelay: 300,
 
     image:
@@ -212,7 +217,8 @@ const WORKS = [
     category: "Go To Market Strategy",
 
     animation: "zoomOut",
-    interval: 2000,
+    // interval: 2000,
+    interval: 1800,
     startDelay: 750,
 
     image:
@@ -248,7 +254,8 @@ const WORKS = [
     category: "Talent Management",
 
     animation: "flipY",
-    interval: 2300,
+    // interval: 2300,
+    interval: 1800,
     startDelay: 1200,
 
     image:
@@ -277,7 +284,8 @@ const WORKS = [
     category: "Performance Marketing",
 
     animation: "diagonalWipe",
-    interval: 2500,
+    // interval: 2500,
+    interval: 1800,
     startDelay: 1700,
 
     image:

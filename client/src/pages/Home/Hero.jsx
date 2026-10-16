@@ -825,7 +825,7 @@ const HERO_CARDS = [
     label: "Branding",
     // title: "Identity that stands out",
     animation: "fadeZoom",
-    interval: 2400,
+    interval: 1800,
     startDelay: 0,
     images: [
       "Images/Bharat - Adiyogi.png",
@@ -848,7 +848,7 @@ const HERO_CARDS = [
     label: "Content",
     // title: "Stories that create demand",
     animation: "slideHorizontal",
-    interval: 2700,
+    interval: 2000,
     startDelay: 500,
     images: [
       "Images/Bharat - Goa.png",
@@ -871,7 +871,7 @@ const HERO_CARDS = [
     label: "Growth",
     // title: "Systems that scale",
     animation: "clipReveal",
-    interval: 3000,
+    interval: 2200,
     startDelay: 1000,
     images: [
        "Images/Bharat - Payment.png",
