@@ -172,14 +172,14 @@ export function Footer() {
         ================================================= */}
         <div
           className="
-            mt-16
+            mt-1
             grid
             grid-cols-2
             gap-10
             border-t
             border-white/10
-            pt-8
-            md:mt-20
+            pt-1
+            md:mt-10
             md:grid-cols-4
             md:gap-8
           "
