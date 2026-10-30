@@ -1218,7 +1218,7 @@ export default function Hero() {
       shadow-lg
     "
   >
-    <video
+        <video
       className="
         block
         aspect-[4/3]
@@ -1228,7 +1228,10 @@ export default function Hero() {
         md:aspect-[4/5]
         lg:aspect-[5/4]
       "
-      src="/videos/fisherman-story.mp4"
+      src="/Images/Ro.mp4"
+      autoPlay
+      muted
+      loop
       controls
       playsInline
       preload="metadata"
