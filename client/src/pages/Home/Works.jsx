@@ -1742,13 +1742,13 @@ export default function Works() {
           grid
           grid-cols-1
           gap-x-8
-          gap-y-24
+          gap-y-2
 
           md:grid-cols-2
-          md:gap-y-32
+          md:gap-y-3
 
           lg:gap-x-12
-          lg:gap-y-40
+          lg:gap-y-4
         "
       >
         {WORKS.map((work, index) => (
