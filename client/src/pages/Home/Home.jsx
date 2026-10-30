@@ -7,7 +7,7 @@ import Works from './Works';
 import { BrandsMarquee  } from './BrandMarquee';
 import { Play, Orbit, Systems } from './Sections';
 import { Footer } from '../../components/common/Footer';
-
+import LetsConnectForm from "../../components/LetsConnectForm";
 const Home = () => {
   return (
     <>
@@ -23,6 +23,7 @@ const Home = () => {
         <section id="brands"><BrandsMarquee /></section>
         <section id="systems"><Systems /></section>
       </main>
+      <LetsConnectForm />
       <Footer />
     </>
   );

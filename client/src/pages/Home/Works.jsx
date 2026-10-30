@@ -351,6 +351,606 @@ function Reveal({ children, delay = 0, className = "" }) {
    - start delay
 ========================================================= */
 
+// function WorkImageSlider({
+//   images,
+//   category,
+//   number,
+//   animation = "fadeZoom",
+//   interval = 2000,
+//   startDelay = 0,
+// }) {
+//   const wrapperRef = useRef(null);
+//   const imageRef = useRef(null);
+//   const progressRef = useRef(null);
+
+//   const currentIndex = useRef(0);
+//   const intervalRef = useRef(null);
+//   const transitionRef = useRef(null);
+
+//   useEffect(() => {
+//     const wrapper = wrapperRef.current;
+//     const image = imageRef.current;
+//     const progress = progressRef.current;
+
+//     if (!wrapper || !image || !images?.length) return;
+
+//     let mounted = true;
+
+//     const ctx = gsap.context(() => {
+//       /* =====================================================
+//          INITIAL IMAGE
+//       ===================================================== */
+
+//       image.src = images[0];
+
+//       gsap.set(image, {
+//         x: 0,
+//         y: 0,
+//         xPercent: 0,
+//         yPercent: 0,
+//         scale: 1,
+//         rotation: 0,
+//         opacity: 1,
+//         clipPath: "inset(0% 0% 0% 0%)",
+//       });
+
+//       /* =====================================================
+//          PROGRESS BAR
+//       ===================================================== */
+
+//       const startProgress = () => {
+//         if (!progress) return;
+
+//         gsap.killTweensOf(progress);
+
+//         gsap.fromTo(
+//           progress,
+//           {
+//             width: "0%",
+//           },
+//           {
+//             width: "100%",
+//             duration: interval / 1000,
+//             ease: "none",
+//           }
+//         );
+//       };
+
+//       /* =====================================================
+//          IMAGE TRANSITION
+//       ===================================================== */
+
+//       const animateImage = (nextImage) => {
+//         if (!mounted) return;
+
+//         if (transitionRef.current) {
+//           transitionRef.current.kill();
+//         }
+
+//         const tl = gsap.timeline();
+
+//         transitionRef.current = tl;
+
+//         /* ===================================================
+//            01 — FADE + ZOOM
+//         =================================================== */
+
+//         if (animation === "fadeZoom") {
+//           tl.to(image, {
+//             opacity: 0,
+//             scale: 1.08,
+//             duration: 0.38,
+//             ease: "power2.inOut",
+//           })
+//             .set(image, {
+//               attr: {
+//                 src: nextImage,
+//               },
+//               x: 0,
+//               y: 0,
+//               xPercent: 0,
+//               yPercent: 0,
+//               rotation: 0,
+//               scale: 0.96,
+//               opacity: 0,
+//               clipPath: "inset(0% 0% 0% 0%)",
+//             })
+//             .to(image, {
+//               opacity: 1,
+//               scale: 1,
+//               duration: 0.75,
+//               ease: "power3.out",
+//             });
+//         }
+
+//         /* ===================================================
+//            02 — HORIZONTAL SLIDE
+//         =================================================== */
+
+//         else if (animation === "slideHorizontal") {
+//           tl.to(image, {
+//             xPercent: -100,
+//             duration: 0.62,
+//             ease: "power4.inOut",
+//           })
+//             .set(image, {
+//               attr: {
+//                 src: nextImage,
+//               },
+//               xPercent: 100,
+//               yPercent: 0,
+//               x: 0,
+//               y: 0,
+//               scale: 1,
+//               rotation: 0,
+//               opacity: 1,
+//               clipPath: "inset(0% 0% 0% 0%)",
+//             })
+//             .to(image, {
+//               xPercent: 0,
+//               duration: 0.72,
+//               ease: "power4.out",
+//             });
+//         }
+
+//         /* ===================================================
+//            03 — VERTICAL SLIDE
+//         =================================================== */
+
+//         else if (animation === "slideVertical") {
+//           tl.to(image, {
+//             yPercent: -100,
+//             duration: 0.62,
+//             ease: "power4.inOut",
+//           })
+//             .set(image, {
+//               attr: {
+//                 src: nextImage,
+//               },
+//               yPercent: 100,
+//               xPercent: 0,
+//               x: 0,
+//               y: 0,
+//               scale: 1,
+//               rotation: 0,
+//               opacity: 1,
+//               clipPath: "inset(0% 0% 0% 0%)",
+//             })
+//             .to(image, {
+//               yPercent: 0,
+//               duration: 0.72,
+//               ease: "power4.out",
+//             });
+//         }
+
+//         /* ===================================================
+//            04 — CLIP REVEAL
+
+//            More dramatic specifically for GTM
+//         =================================================== */
+
+//         else if (animation === "clipReveal") {
+//           tl.to(image, {
+//             clipPath: "inset(0% 100% 0% 0%)",
+//             scale: 1.07,
+//             duration: 0.7,
+//             ease: "power4.inOut",
+//           })
+//             .set(image, {
+//               attr: {
+//                 src: nextImage,
+//               },
+//               clipPath: "inset(0% 0% 0% 100%)",
+//               scale: 1.07,
+//               x: 0,
+//               y: 0,
+//               xPercent: 0,
+//               yPercent: 0,
+//               rotation: 0,
+//               opacity: 1,
+//             })
+//             .to(image, {
+//               clipPath: "inset(0% 0% 0% 0%)",
+//               scale: 1,
+//               duration: 0.9,
+//               ease: "power4.out",
+//             });
+//         }
+
+//         /* ===================================================
+//            05 — ROTATE + SCALE
+//         =================================================== */
+
+//         else if (animation === "rotateScale") {
+//           tl.to(image, {
+//             opacity: 0,
+//             scale: 1.13,
+//             rotation: 2.8,
+//             duration: 0.42,
+//             ease: "power2.inOut",
+//           })
+//             .set(image, {
+//               attr: {
+//                 src: nextImage,
+//               },
+//               opacity: 0,
+//               scale: 0.91,
+//               rotation: -2.8,
+//               x: 0,
+//               y: 0,
+//               xPercent: 0,
+//               yPercent: 0,
+//               clipPath: "inset(0% 0% 0% 0%)",
+//             })
+//             .to(image, {
+//               opacity: 1,
+//               scale: 1,
+//               rotation: 0,
+//               duration: 0.82,
+//               ease: "power3.out",
+//             });
+//         }
+
+//         /* ===================================================
+//            FALLBACK
+//         =================================================== */
+
+//         else {
+//           tl.to(image, {
+//             opacity: 0,
+//             duration: 0.3,
+//           })
+//             .set(image, {
+//               attr: {
+//                 src: nextImage,
+//               },
+//             })
+//             .to(image, {
+//               opacity: 1,
+//               duration: 0.5,
+//             });
+//         }
+//       };
+
+//       /* =====================================================
+//          CHANGE IMAGE
+
+//          IMPORTANT:
+//          We no longer wait forever for image.onload.
+//          If image fails, slider still continues.
+//       ===================================================== */
+
+//       const changeImage = () => {
+//         if (!mounted) return;
+
+//         const nextIndex =
+//           (currentIndex.current + 1) % images.length;
+
+//         const nextImage = images[nextIndex];
+
+//         currentIndex.current = nextIndex;
+
+//         animateImage(nextImage);
+
+//         startProgress();
+//       };
+
+//       /* =====================================================
+//          PRELOAD ALL IMAGES
+//       ===================================================== */
+
+//       images.forEach((src) => {
+//         const preload = new Image();
+
+//         preload.src = src;
+//       });
+
+//       /* =====================================================
+//          START AFTER INDIVIDUAL DELAY
+//       ===================================================== */
+
+//       const startTimer = setTimeout(() => {
+//         if (!mounted) return;
+
+//         startProgress();
+
+//         intervalRef.current = setInterval(
+//           changeImage,
+//           interval
+//         );
+//       }, startDelay);
+
+//       /* =====================================================
+//          MOUSE PARALLAX
+//       ===================================================== */
+
+//       const handleMouseMove = (event) => {
+//         const rect = wrapper.getBoundingClientRect();
+
+//         const x =
+//           (event.clientX - rect.left) / rect.width - 0.5;
+
+//         const y =
+//           (event.clientY - rect.top) / rect.height - 0.5;
+
+//         gsap.to(image, {
+//           x: x * 10,
+//           y: y * 7,
+//           duration: 0.7,
+//           ease: "power3.out",
+//           overwrite: false,
+//         });
+//       };
+
+//       /* =====================================================
+//          MOUSE ENTER
+//       ===================================================== */
+
+//       const handleMouseEnter = () => {
+//         gsap.to(image, {
+//           scale: 1.025,
+//           duration: 0.7,
+//           ease: "power3.out",
+//           overwrite: false,
+//         });
+//       };
+
+//       /* =====================================================
+//          MOUSE LEAVE
+//       ===================================================== */
+
+//       const handleMouseLeave = () => {
+//         gsap.to(image, {
+//           x: 0,
+//           y: 0,
+//           scale: 1,
+//           duration: 0.8,
+//           ease: "power3.out",
+//           overwrite: false,
+//         });
+//       };
+
+//       wrapper.addEventListener(
+//         "mousemove",
+//         handleMouseMove
+//       );
+
+//       wrapper.addEventListener(
+//         "mouseenter",
+//         handleMouseEnter
+//       );
+
+//       wrapper.addEventListener(
+//         "mouseleave",
+//         handleMouseLeave
+//       );
+
+//       /* =====================================================
+//          CLEANUP
+//       ===================================================== */
+
+//       return () => {
+//         mounted = false;
+
+//         clearTimeout(startTimer);
+
+//         if (intervalRef.current) {
+//           clearInterval(intervalRef.current);
+//         }
+
+//         if (transitionRef.current) {
+//           transitionRef.current.kill();
+//         }
+
+//         wrapper.removeEventListener(
+//           "mousemove",
+//           handleMouseMove
+//         );
+
+//         wrapper.removeEventListener(
+//           "mouseenter",
+//           handleMouseEnter
+//         );
+
+//         wrapper.removeEventListener(
+//           "mouseleave",
+//           handleMouseLeave
+//         );
+
+//         gsap.killTweensOf(image);
+//         gsap.killTweensOf(progress);
+//       };
+//     }, wrapper);
+
+//     return () => {
+//       mounted = false;
+
+//       if (intervalRef.current) {
+//         clearInterval(intervalRef.current);
+//       }
+
+//       ctx.revert();
+//     };
+//   }, [
+//     images,
+//     animation,
+//     interval,
+//     startDelay,
+//   ]);
+
+//   return (
+//     <div
+//       ref={wrapperRef}
+//       className="
+//         group
+//         relative
+//         aspect-[4/3]
+//         w-full
+//         overflow-hidden
+//         bg-[#01295C]
+//       "
+//     >
+//       {/* =================================================
+//           IMAGE
+//       ================================================= */}
+
+//       <img
+//         ref={imageRef}
+//         src={images[0]}
+//         alt={category}
+//         className="
+//           absolute
+//           inset-0
+//           h-full
+//           w-full
+//           object-cover
+//           will-change-transform
+//         "
+//         draggable="false"
+//       />
+
+//       {/* =================================================
+//           SUBTLE OVERLAY
+//       ================================================= */}
+
+//       <div
+//         className="
+//           pointer-events-none
+//           absolute
+//           inset-0
+//           z-[1]
+//           bg-[#01295C]/[0.06]
+//           transition-opacity
+//           duration-500
+//           group-hover:bg-transparent
+//         "
+//       />
+
+//       {/* =================================================
+//           CATEGORY
+//       ================================================= */}
+
+//       <div
+//         className="
+//           absolute
+//           left-5
+//           top-5
+//           z-10
+//           text-[10px]
+//           font-medium
+//           uppercase
+//           tracking-[0.16em]
+//           text-white
+
+//           md:left-6
+//           md:top-6
+//         "
+//       >
+//         {category}
+//       </div>
+
+//       {/* =================================================
+//           NUMBER
+//       ================================================= */}
+
+//       <div
+//         className="
+//           absolute
+//           bottom-5
+//           left-5
+//           z-10
+//           text-[11px]
+//           font-medium
+//           tracking-[0.12em]
+//           text-white
+
+//           md:bottom-6
+//           md:left-6
+//         "
+//       >
+//         {number}
+//       </div>
+
+//       {/* =================================================
+//           EXPLORE
+//       ================================================= */}
+
+//       <div
+//         className="
+//           absolute
+//           right-5
+//           top-5
+//           z-10
+//           flex
+//           items-center
+//           gap-2
+//           text-[10px]
+//           font-medium
+//           uppercase
+//           tracking-[0.16em]
+//           text-white
+
+//           md:right-6
+//           md:top-6
+//         "
+//       >
+//         <span>Explore</span>
+
+//         <span
+//           className="
+//             h-1.5
+//             w-1.5
+//             rounded-full
+//             bg-[#EB2226]
+//           "
+//         />
+//       </div>
+
+//       {/* =================================================
+//           PROGRESS
+//       ================================================= */}
+
+//       <div
+//         className="
+//           absolute
+//           bottom-0
+//           left-0
+//           z-20
+//           h-[2px]
+//           w-full
+//           bg-white/20
+//         "
+//       >
+//         <div
+//           ref={progressRef}
+//           className="
+//             h-full
+//             w-0
+//             bg-[#EB2226]
+//           "
+//         />
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+const ANIM_ORDER = [
+  "fromRight",
+  "fromLeft",
+  "fromDown",
+  "fromUp",
+  "zoomIn",
+  "zoomOut",
+  "fadeIn",
+  "fadeOut",
+  "flyIn",
+  "flyOut",
+];
+
 function WorkImageSlider({
   images,
   category,
@@ -360,44 +960,47 @@ function WorkImageSlider({
   startDelay = 0,
 }) {
   const wrapperRef = useRef(null);
-  const imageRef = useRef(null);
+  const layerRef = useRef(null);
+  const imgARef = useRef(null);
+  const imgBRef = useRef(null);
   const progressRef = useRef(null);
 
-  const currentIndex = useRef(0);
   const intervalRef = useRef(null);
   const transitionRef = useRef(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
-    const image = imageRef.current;
+    const layer = layerRef.current;
+    const imgA = imgARef.current;
+    const imgB = imgBRef.current;
     const progress = progressRef.current;
 
-    if (!wrapper || !image || !images?.length) return;
+    if (!wrapper || !layer || !imgA || !imgB || !images?.length) return;
 
     let mounted = true;
+    let current = 0;
+    let top = imgA;
+    let back = imgB;
+
+    const RESET = {
+      x: 0,
+      y: 0,
+      xPercent: 0,
+      yPercent: 0,
+      scale: 1,
+      rotation: 0,
+      opacity: 1,
+    };
 
     const ctx = gsap.context(() => {
-      /* =====================================================
-         INITIAL IMAGE
-      ===================================================== */
+      /* INITIAL */
+      imgA.src = images[0];
+      imgB.src = images[0];
 
-      image.src = images[0];
+      gsap.set(imgA, { ...RESET, zIndex: 2 });
+      gsap.set(imgB, { ...RESET, opacity: 0, zIndex: 1 });
 
-      gsap.set(image, {
-        x: 0,
-        y: 0,
-        xPercent: 0,
-        yPercent: 0,
-        scale: 1,
-        rotation: 0,
-        opacity: 1,
-        clipPath: "inset(0% 0% 0% 0%)",
-      });
-
-      /* =====================================================
-         PROGRESS BAR
-      ===================================================== */
-
+      /* PROGRESS BAR */
       const startProgress = () => {
         if (!progress) return;
 
@@ -405,275 +1008,119 @@ function WorkImageSlider({
 
         gsap.fromTo(
           progress,
-          {
-            width: "0%",
-          },
-          {
-            width: "100%",
-            duration: interval / 1000,
-            ease: "none",
-          }
+          { width: "0%" },
+          { width: "100%", duration: interval / 1000, ease: "none" }
         );
       };
 
-      /* =====================================================
-         IMAGE TRANSITION
-      ===================================================== */
-
-      const animateImage = (nextImage) => {
+      /* IMAGE TRANSITION (photo number ke hisaab se) */
+      const animateImage = (nextIndex) => {
         if (!mounted) return;
 
         if (transitionRef.current) {
           transitionRef.current.kill();
         }
 
-        const tl = gsap.timeline();
+        const type = ANIM_ORDER[nextIndex % ANIM_ORDER.length];
+        const isOut = type === "fadeOut" || type === "flyOut";
+
+        const incoming = back;
+        const outgoing = top;
+
+        top = incoming;
+        back = outgoing;
+
+        incoming.src = images[nextIndex];
+
+        // in-type: nayi photo upar. out-type: purani photo upar, nayi neeche
+        gsap.set(incoming, { ...RESET, zIndex: isOut ? 1 : 2 });
+        gsap.set(outgoing, { ...RESET, zIndex: isOut ? 2 : 1 });
+
+        const tl = gsap.timeline({
+          onComplete: () => gsap.set(outgoing, { opacity: 0 }),
+        });
 
         transitionRef.current = tl;
 
-        /* ===================================================
-           01 — FADE + ZOOM
-        =================================================== */
-
-        if (animation === "fadeZoom") {
-          tl.to(image, {
+        if (type === "fromRight") {
+          tl.fromTo(incoming, { xPercent: 100 }, { xPercent: 0, duration: 0.7, ease: "power3.out" });
+        } else if (type === "fromLeft") {
+          tl.fromTo(incoming, { xPercent: -100 }, { xPercent: 0, duration: 0.7, ease: "power3.out" });
+        } else if (type === "fromDown") {
+          tl.fromTo(incoming, { yPercent: 100 }, { yPercent: 0, duration: 0.7, ease: "power3.out" });
+        } else if (type === "fromUp") {
+          tl.fromTo(incoming, { yPercent: -100 }, { yPercent: 0, duration: 0.7, ease: "power3.out" });
+        } else if (type === "zoomIn") {
+          tl.fromTo(
+            incoming,
+            { scale: 0.4, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }
+          );
+        } else if (type === "zoomOut") {
+          tl.fromTo(
+            incoming,
+            { scale: 1.7, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }
+          );
+        } else if (type === "fadeIn") {
+          tl.fromTo(incoming, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power2.out" });
+        } else if (type === "fadeOut") {
+          tl.to(outgoing, { opacity: 0, duration: 0.7, ease: "power2.inOut" });
+        } else if (type === "flyIn") {
+          tl.fromTo(
+            incoming,
+            { xPercent: 120, yPercent: 60, rotation: 14, scale: 0.6, opacity: 0 },
+            { xPercent: 0, yPercent: 0, rotation: 0, scale: 1, opacity: 1, duration: 0.85, ease: "power3.out" }
+          );
+        } else if (type === "flyOut") {
+          tl.to(outgoing, {
+            xPercent: -120,
+            yPercent: -60,
+            rotation: -14,
+            scale: 0.6,
             opacity: 0,
-            scale: 1.08,
-            duration: 0.38,
-            ease: "power2.inOut",
-          })
-            .set(image, {
-              attr: {
-                src: nextImage,
-              },
-              x: 0,
-              y: 0,
-              xPercent: 0,
-              yPercent: 0,
-              rotation: 0,
-              scale: 0.96,
-              opacity: 0,
-              clipPath: "inset(0% 0% 0% 0%)",
-            })
-            .to(image, {
-              opacity: 1,
-              scale: 1,
-              duration: 0.75,
-              ease: "power3.out",
-            });
-        }
-
-        /* ===================================================
-           02 — HORIZONTAL SLIDE
-        =================================================== */
-
-        else if (animation === "slideHorizontal") {
-          tl.to(image, {
-            xPercent: -100,
-            duration: 0.62,
-            ease: "power4.inOut",
-          })
-            .set(image, {
-              attr: {
-                src: nextImage,
-              },
-              xPercent: 100,
-              yPercent: 0,
-              x: 0,
-              y: 0,
-              scale: 1,
-              rotation: 0,
-              opacity: 1,
-              clipPath: "inset(0% 0% 0% 0%)",
-            })
-            .to(image, {
-              xPercent: 0,
-              duration: 0.72,
-              ease: "power4.out",
-            });
-        }
-
-        /* ===================================================
-           03 — VERTICAL SLIDE
-        =================================================== */
-
-        else if (animation === "slideVertical") {
-          tl.to(image, {
-            yPercent: -100,
-            duration: 0.62,
-            ease: "power4.inOut",
-          })
-            .set(image, {
-              attr: {
-                src: nextImage,
-              },
-              yPercent: 100,
-              xPercent: 0,
-              x: 0,
-              y: 0,
-              scale: 1,
-              rotation: 0,
-              opacity: 1,
-              clipPath: "inset(0% 0% 0% 0%)",
-            })
-            .to(image, {
-              yPercent: 0,
-              duration: 0.72,
-              ease: "power4.out",
-            });
-        }
-
-        /* ===================================================
-           04 — CLIP REVEAL
-
-           More dramatic specifically for GTM
-        =================================================== */
-
-        else if (animation === "clipReveal") {
-          tl.to(image, {
-            clipPath: "inset(0% 100% 0% 0%)",
-            scale: 1.07,
-            duration: 0.7,
-            ease: "power4.inOut",
-          })
-            .set(image, {
-              attr: {
-                src: nextImage,
-              },
-              clipPath: "inset(0% 0% 0% 100%)",
-              scale: 1.07,
-              x: 0,
-              y: 0,
-              xPercent: 0,
-              yPercent: 0,
-              rotation: 0,
-              opacity: 1,
-            })
-            .to(image, {
-              clipPath: "inset(0% 0% 0% 0%)",
-              scale: 1,
-              duration: 0.9,
-              ease: "power4.out",
-            });
-        }
-
-        /* ===================================================
-           05 — ROTATE + SCALE
-        =================================================== */
-
-        else if (animation === "rotateScale") {
-          tl.to(image, {
-            opacity: 0,
-            scale: 1.13,
-            rotation: 2.8,
-            duration: 0.42,
-            ease: "power2.inOut",
-          })
-            .set(image, {
-              attr: {
-                src: nextImage,
-              },
-              opacity: 0,
-              scale: 0.91,
-              rotation: -2.8,
-              x: 0,
-              y: 0,
-              xPercent: 0,
-              yPercent: 0,
-              clipPath: "inset(0% 0% 0% 0%)",
-            })
-            .to(image, {
-              opacity: 1,
-              scale: 1,
-              rotation: 0,
-              duration: 0.82,
-              ease: "power3.out",
-            });
-        }
-
-        /* ===================================================
-           FALLBACK
-        =================================================== */
-
-        else {
-          tl.to(image, {
-            opacity: 0,
-            duration: 0.3,
-          })
-            .set(image, {
-              attr: {
-                src: nextImage,
-              },
-            })
-            .to(image, {
-              opacity: 1,
-              duration: 0.5,
-            });
+            duration: 0.85,
+            ease: "power3.in",
+          });
         }
       };
 
-      /* =====================================================
-         CHANGE IMAGE
-
-         IMPORTANT:
-         We no longer wait forever for image.onload.
-         If image fails, slider still continues.
-      ===================================================== */
-
+      /* CHANGE IMAGE */
       const changeImage = () => {
         if (!mounted) return;
 
-        const nextIndex =
-          (currentIndex.current + 1) % images.length;
+        const nextIndex = (current + 1) % images.length;
 
-        const nextImage = images[nextIndex];
+        current = nextIndex;
 
-        currentIndex.current = nextIndex;
-
-        animateImage(nextImage);
+        animateImage(nextIndex);
 
         startProgress();
       };
 
-      /* =====================================================
-         PRELOAD ALL IMAGES
-      ===================================================== */
-
+      /* PRELOAD */
       images.forEach((src) => {
         const preload = new Image();
-
         preload.src = src;
       });
 
-      /* =====================================================
-         START AFTER INDIVIDUAL DELAY
-      ===================================================== */
-
+      /* START AFTER DELAY */
       const startTimer = setTimeout(() => {
         if (!mounted) return;
 
         startProgress();
 
-        intervalRef.current = setInterval(
-          changeImage,
-          interval
-        );
+        intervalRef.current = setInterval(changeImage, interval);
       }, startDelay);
 
-      /* =====================================================
-         MOUSE PARALLAX
-      ===================================================== */
-
+      /* MOUSE PARALLAX (ab layer pe) */
       const handleMouseMove = (event) => {
         const rect = wrapper.getBoundingClientRect();
 
-        const x =
-          (event.clientX - rect.left) / rect.width - 0.5;
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-        const y =
-          (event.clientY - rect.top) / rect.height - 0.5;
-
-        gsap.to(image, {
+        gsap.to(layer, {
           x: x * 10,
           y: y * 7,
           duration: 0.7,
@@ -682,12 +1129,8 @@ function WorkImageSlider({
         });
       };
 
-      /* =====================================================
-         MOUSE ENTER
-      ===================================================== */
-
       const handleMouseEnter = () => {
-        gsap.to(image, {
+        gsap.to(layer, {
           scale: 1.025,
           duration: 0.7,
           ease: "power3.out",
@@ -695,12 +1138,8 @@ function WorkImageSlider({
         });
       };
 
-      /* =====================================================
-         MOUSE LEAVE
-      ===================================================== */
-
       const handleMouseLeave = () => {
-        gsap.to(image, {
+        gsap.to(layer, {
           x: 0,
           y: 0,
           scale: 1,
@@ -710,25 +1149,11 @@ function WorkImageSlider({
         });
       };
 
-      wrapper.addEventListener(
-        "mousemove",
-        handleMouseMove
-      );
+      wrapper.addEventListener("mousemove", handleMouseMove);
+      wrapper.addEventListener("mouseenter", handleMouseEnter);
+      wrapper.addEventListener("mouseleave", handleMouseLeave);
 
-      wrapper.addEventListener(
-        "mouseenter",
-        handleMouseEnter
-      );
-
-      wrapper.addEventListener(
-        "mouseleave",
-        handleMouseLeave
-      );
-
-      /* =====================================================
-         CLEANUP
-      ===================================================== */
-
+      /* CLEANUP */
       return () => {
         mounted = false;
 
@@ -742,23 +1167,11 @@ function WorkImageSlider({
           transitionRef.current.kill();
         }
 
-        wrapper.removeEventListener(
-          "mousemove",
-          handleMouseMove
-        );
+        wrapper.removeEventListener("mousemove", handleMouseMove);
+        wrapper.removeEventListener("mouseenter", handleMouseEnter);
+        wrapper.removeEventListener("mouseleave", handleMouseLeave);
 
-        wrapper.removeEventListener(
-          "mouseenter",
-          handleMouseEnter
-        );
-
-        wrapper.removeEventListener(
-          "mouseleave",
-          handleMouseLeave
-        );
-
-        gsap.killTweensOf(image);
-        gsap.killTweensOf(progress);
+        gsap.killTweensOf([imgA, imgB, layer, progress]);
       };
     }, wrapper);
 
@@ -771,168 +1184,60 @@ function WorkImageSlider({
 
       ctx.revert();
     };
-  }, [
-    images,
-    animation,
-    interval,
-    startDelay,
-  ]);
+  }, [images, animation, interval, startDelay]);
 
   return (
     <div
       ref={wrapperRef}
-      className="
-        group
-        relative
-        aspect-[4/3]
-        w-full
-        overflow-hidden
-        bg-[#01295C]
-      "
+      className="group relative aspect-[4/3] w-full overflow-hidden bg-[#F3F4F6]"
     >
-      {/* =================================================
-          IMAGE
-      ================================================= */}
+      {/* IMAGE LAYER (2 images ek ke upar ek, isliye blue/khali screen nahi dikhegi) */}
+      <div ref={layerRef} className="absolute inset-0 will-change-transform">
+        <img
+          ref={imgARef}
+          src={images[0]}
+          alt={category}
+          className="absolute inset-0 h-full w-full object-cover will-change-transform"
+          draggable="false"
+        />
 
-      <img
-        ref={imageRef}
-        src={images[0]}
-        alt={category}
-        className="
-          absolute
-          inset-0
-          h-full
-          w-full
-          object-cover
-          will-change-transform
-        "
-        draggable="false"
-      />
+        <img
+          ref={imgBRef}
+          src={images[0]}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover will-change-transform"
+          draggable="false"
+        />
+      </div>
 
-      {/* =================================================
-          SUBTLE OVERLAY
-      ================================================= */}
+      {/* SUBTLE OVERLAY */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[#01295C]/[0.06] transition-opacity duration-500 group-hover:bg-transparent" />
 
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          z-[1]
-          bg-[#01295C]/[0.06]
-          transition-opacity
-          duration-500
-          group-hover:bg-transparent
-        "
-      />
-
-      {/* =================================================
-          CATEGORY
-      ================================================= */}
-
-      <div
-        className="
-          absolute
-          left-5
-          top-5
-          z-10
-          text-[10px]
-          font-medium
-          uppercase
-          tracking-[0.16em]
-          text-white
-
-          md:left-6
-          md:top-6
-        "
-      >
+      {/* CATEGORY */}
+      <div className="absolute left-5 top-5 z-10 text-[10px] font-medium uppercase tracking-[0.16em] text-white md:left-6 md:top-6">
         {category}
       </div>
 
-      {/* =================================================
-          NUMBER
-      ================================================= */}
-
-      <div
-        className="
-          absolute
-          bottom-5
-          left-5
-          z-10
-          text-[11px]
-          font-medium
-          tracking-[0.12em]
-          text-white
-
-          md:bottom-6
-          md:left-6
-        "
-      >
+      {/* NUMBER */}
+      <div className="absolute bottom-5 left-5 z-10 text-[11px] font-medium tracking-[0.12em] text-white md:bottom-6 md:left-6">
         {number}
       </div>
 
-      {/* =================================================
-          EXPLORE
-      ================================================= */}
-
-      <div
-        className="
-          absolute
-          right-5
-          top-5
-          z-10
-          flex
-          items-center
-          gap-2
-          text-[10px]
-          font-medium
-          uppercase
-          tracking-[0.16em]
-          text-white
-
-          md:right-6
-          md:top-6
-        "
-      >
+      {/* EXPLORE */}
+      <div className="absolute right-5 top-5 z-10 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.16em] text-white md:right-6 md:top-6">
         <span>Explore</span>
-
-        <span
-          className="
-            h-1.5
-            w-1.5
-            rounded-full
-            bg-[#EB2226]
-          "
-        />
+        <span className="h-1.5 w-1.5 rounded-full bg-[#EB2226]" />
       </div>
 
-      {/* =================================================
-          PROGRESS
-      ================================================= */}
-
-      <div
-        className="
-          absolute
-          bottom-0
-          left-0
-          z-20
-          h-[2px]
-          w-full
-          bg-white/20
-        "
-      >
-        <div
-          ref={progressRef}
-          className="
-            h-full
-            w-0
-            bg-[#EB2226]
-          "
-        />
+      {/* PROGRESS */}
+      <div className="absolute bottom-0 left-0 z-20 h-[2px] w-full bg-white/20">
+        <div ref={progressRef} className="h-full w-0 bg-[#EB2226]" />
       </div>
     </div>
   );
 }
+
 
 /* =========================================================
    WORK CARD
@@ -1032,7 +1337,9 @@ function WorkCard({ work, index }) {
 
 
   const handleTagClick = (tag) => {
-    const target = document.getElementById("contact");
+    // const target = document.getElementById("contact");
+
+        const target = document.getElementById("lets-connect");
 
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });

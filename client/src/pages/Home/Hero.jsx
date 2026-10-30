@@ -896,25 +896,84 @@ const HERO_CARDS = [
   },
 ];
 
-const CARD_VARIANTS = {
-  fadeZoom: {
-    initial: { opacity: 0, scale: 1.15 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 },
-    transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
+// const CARD_VARIANTS = {
+//   fadeZoom: {
+//     initial: { opacity: 0, scale: 1.15 },
+//     animate: { opacity: 1, scale: 1 },
+//     exit: { opacity: 0, scale: 0.95 },
+//     transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
+//   },
+//   slideHorizontal: {
+//     initial: { x: "100%" },
+//     animate: { x: "0%" },
+//     exit: { x: "-100%" },
+//     transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] },
+//   },
+//   clipReveal: {
+//     initial: { clipPath: "inset(0% 0% 100% 0%)", scale: 1.1 },
+//     animate: { clipPath: "inset(0% 0% 0% 0%)", scale: 1 },
+//     exit: { opacity: 1 },
+//     transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] },
+//   },
+// };
+
+const CARD_ORDER = [
+  "fromRight",
+  "fromLeft",
+  "fromDown",
+  "fromUp",
+  "zoomIn",
+  "zoomOut",
+  "fadeIn",
+  "fadeOut",
+  "flyIn",
+  "flyOut",
+];
+
+const OUT_TYPES = ["fadeOut", "flyOut"];
+
+const EASE_IN = [0.22, 1, 0.36, 1];
+
+const CARD_ENTER = {
+  fromRight: { initial: { x: "100%" }, animate: { x: "0%" } },
+  fromLeft: { initial: { x: "-100%" }, animate: { x: "0%" } },
+  fromDown: { initial: { y: "100%" }, animate: { y: "0%" } },
+  fromUp: { initial: { y: "-100%" }, animate: { y: "0%" } },
+  zoomIn: {
+    initial: { scale: 0.4, opacity: 0 },
+    animate: { scale: 1, opacity: 1 },
   },
-  slideHorizontal: {
-    initial: { x: "100%" },
-    animate: { x: "0%" },
-    exit: { x: "-100%" },
-    transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] },
+  zoomOut: {
+    initial: { scale: 1.7, opacity: 0 },
+    animate: { scale: 1, opacity: 1 },
   },
-  clipReveal: {
-    initial: { clipPath: "inset(0% 0% 100% 0%)", scale: 1.1 },
-    animate: { clipPath: "inset(0% 0% 0% 0%)", scale: 1 },
-    exit: { opacity: 1 },
-    transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] },
+  fadeIn: { initial: { opacity: 0 }, animate: { opacity: 1 } },
+  fadeOut: { initial: { opacity: 1 }, animate: { opacity: 1 } },
+  flyIn: {
+    initial: { x: "120%", y: "60%", rotate: 14, scale: 0.6, opacity: 0 },
+    animate: { x: "0%", y: "0%", rotate: 0, scale: 1, opacity: 1 },
   },
+  flyOut: { initial: { opacity: 1 }, animate: { opacity: 1 } },
+};
+
+const CARD_EXIT = {
+  fadeOut: { opacity: 0 },
+  flyOut: { x: "-120%", y: "-60%", rotate: -14, scale: 0.6, opacity: 0 },
+};
+
+const CARD_DURATION = 0.7;
+
+const cardVariants = {
+  enter: (type) => CARD_ENTER[type].initial,
+  center: (type) => ({
+    ...CARD_ENTER[type].animate,
+    transition: { duration: CARD_DURATION, ease: EASE_IN },
+  }),
+  exit: (type) => ({
+    // in-type me purani image neeche ruki rahe, out-type me fade/fly ho
+    ...(CARD_EXIT[type] || { opacity: 0.99 }),
+    transition: { duration: CARD_DURATION, ease: EASE_IN },
+  }),
 };
 
 /* =========================================================
@@ -923,7 +982,9 @@ const CARD_VARIANTS = {
 
 function HeroCard({ card, number }) {
   const [index, setIndex] = useState(0);
-  const variant = CARD_VARIANTS[card.animation] || CARD_VARIANTS.fadeZoom;
+  // const variant = CARD_VARIANTS[card.animation] || CARD_VARIANTS.fadeZoom;
+
+    const type = CARD_ORDER[index % CARD_ORDER.length];
 
   useEffect(() => {
     // preload images
@@ -957,7 +1018,7 @@ function HeroCard({ card, number }) {
         bg-[#01295C]
       "
     >
-      <AnimatePresence initial={false}>
+      {/* <AnimatePresence initial={false}>
         <motion.img
           key={index}
           src={card.images[index]}
@@ -967,6 +1028,22 @@ function HeroCard({ card, number }) {
           animate={variant.animate}
           exit={variant.exit}
           transition={variant.transition}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </AnimatePresence> */}
+
+      <AnimatePresence initial={false} custom={type}>
+        <motion.img
+          key={index}
+          src={card.images[index]}
+          alt={card.label}
+          draggable="false"
+          custom={type}
+          variants={cardVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          style={{ zIndex: OUT_TYPES.includes(type) ? 1 : 3 }}
           className="absolute inset-0 h-full w-full object-cover"
         />
       </AnimatePresence>
@@ -1024,187 +1101,176 @@ export default function Hero() {
 
       {/* =====================================================
           HERO INTRO
-      ===================================================== */}
-      <div
+    
+{/* =====================================================
+    HERO INTRO — TEXT LEFT, VIDEO RIGHT
+===================================================== */}
+
+<div
+  className="
+    relative
+    grid
+    grid-cols-1
+    items-center
+    gap-8
+    px-5
+    pb-12
+    pt-28
+
+    sm:px-6
+    sm:pt-32
+
+    md:min-h-[680px]
+    md:grid-cols-2
+    md:gap-8
+    md:px-8
+    md:py-20
+
+    lg:gap-12
+    lg:px-10
+  "
+>
+  {/* LEFT SIDE — EXISTING FISHERMAN TEXT */}
+  <motion.div
+    initial={{ opacity: 0, x: -35 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{
+      duration: 0.8,
+      ease: [0.76, 0, 0.24, 1],
+    }}
+    className="relative w-full min-w-0"
+  >
+    <p
+      className="
+        text-[21px]
+        leading-[1.2]
+        tracking-[-0.045em]
+        sm:text-[23px]
+        md:text-[25px]
+        lg:text-[30px]
+      "
+    >
+      <span className="text-[#A7A9AC]">
+        Every fisherman knows the sea, the changing tides and how to
+        bring home the finest catch.
+      </span>{" "}
+      But the journey doesn’t end at the shore. The catch still needs
+      the right market and the value it deserves.
+    </p>
+
+    <p
+      className="
+        mt-5
+        text-[21px]
+        leading-[1.2]
+        tracking-[-0.045em]
+        sm:text-[23px]
+        md:text-[25px]
+        lg:text-[30px]
+      "
+    >
+      You bring the expertise. We tell your story and create the
+      demand to grow your business around it.
+    </p>
+
+    <p
+      className="
+        mt-5
+        text-[21px]
+        leading-[1.2]
+        tracking-[-0.045em]
+        text-[#01295C]
+        sm:text-[23px]
+        md:text-[25px]
+        lg:text-[30px]
+      "
+    >
+      <span
         className="
-          relative
-          px-5
-          pt-28
-          pb-14
-
-          sm:px-6
-          sm:pt-32
-
-          md:min-h-[680px]
-          md:px-8
-          md:pt-0
-          md:pb-0
-
-          lg:px-10
+          underline
+          decoration-[#EB2226]
+          decoration-[2px]
+          underline-offset-[4px]
         "
       >
+        Focus on your craft.
+      </span>{" "}
+      Let Roakfield navigate the rest.
+    </p>
+  </motion.div>
 
-        {/* =====================================================
-            MAIN HERO COPY
-        ===================================================== */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 30,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 1,
-            ease: [0.76, 0, 0.24, 1],
-          }}
-          className="
-            relative
-            w-full
-            max-w-[850px]
+  {/* RIGHT SIDE — VIDEO */}
+  <motion.div
+    initial={{ opacity: 0, x: 35 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{
+      duration: 0.8,
+      delay: 0.2,
+      ease: [0.76, 0, 0.24, 1],
+    }}
+    className="
+      relative
+      w-full
+      min-w-0
+      overflow-hidden
+      rounded-xl
+      bg-[#E9EEF5]
+      shadow-lg
+    "
+  >
+    <video
+      className="
+        block
+        aspect-[4/3]
+        h-auto
+        w-full
+        object-cover
+        md:aspect-[4/5]
+        lg:aspect-[5/4]
+      "
+      src="/videos/fisherman-story.mp4"
+      controls
+      playsInline
+      preload="metadata"
+      aria-label="Roakfield fisherman business story video"
+    >
+      Your browser does not support HTML video.
+    </video>
+  </motion.div>
 
-            md:absolute
-            md:left-8
-            md:top-[245px]
+  {/* SCROLL INDICATOR */}
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.8, delay: 0.5 }}
+    className="
+      flex
+      items-center
+      gap-3
+      text-[11px]
+      tracking-[-0.02em]
+      text-[#A7A9AC]
+      md:col-span-2
+      md:justify-end
+      md:text-[12px]
+    "
+  >
+    <span>[SCROLL]</span>
 
-            lg:left-10
-          "
-        >
+    <motion.span
+      animate={{ y: [0, 5, 0] }}
+      transition={{
+        duration: 1.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+      className="text-[#EB2226]"
+    >
+      ↓
+    </motion.span>
+  </motion.div>
+</div>
 
-          {/* =================================================
-              PARAGRAPH 1
-          ================================================= */}
-          <p
-            className="
-              text-[21px]
-              leading-[1.12]
-              tracking-[-0.045em]
-
-              sm:text-[23px]
-
-              md:text-[28px]
-
-              lg:text-[31px]
-            "
-          >
-            <span className="text-[#A7A9AC]">
-              Every fisherman knows the sea, the changing tides and how to
-              bring home the finest catch.
-            </span>{" "}
-            But the journey doesn’t end at the shore. The catch still needs
-            the right market and the value it deserves.
-          </p>
-
-          {/* =================================================
-              PARAGRAPH 2
-          ================================================= */}
-          <p
-            className="
-              mt-4
-              text-[21px]
-              leading-[1.12]
-              tracking-[-0.045em]
-
-              sm:text-[23px]
-
-              md:mt-5
-              md:text-[28px]
-
-              lg:text-[31px]
-            "
-          >
-            You bring the expertise. We tell your story and create the
-            demand to grow your business around it.
-          </p>
-
-          {/* =================================================
-              PARAGRAPH 3
-          ================================================= */}
-          <p
-            className="
-              mt-4
-              max-w-[700px]
-              text-[21px]
-              leading-[1.12]
-              tracking-[-0.045em]
-              text-[#01295C]
-
-              sm:text-[23px]
-
-              md:mt-5
-              md:text-[28px]
-
-              lg:text-[31px]
-            "
-          >
-            <span
-              className="
-                underline
-                decoration-[#EB2226]
-                decoration-[2px]
-                underline-offset-[4px]
-              "
-            >
-              Focus on your craft.
-            </span>{" "}
-            Let Roakfield navigate the rest.
-          </p>
-
-        </motion.div>
-
-        {/* =====================================================
-            SCROLL INDICATOR
-        ===================================================== */}
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0.8,
-            delay: 0.5,
-          }}
-          className="
-            mt-10
-            flex
-            items-center
-            gap-2
-            text-[10px]
-            tracking-[-0.02em]
-            text-[#A7A9AC]
-
-            md:absolute
-            md:right-8
-            md:top-[350px]
-            md:mt-0
-            md:gap-3
-            md:text-[12px]
-
-            lg:right-10
-          "
-        >
-          <span>[SCROLL]</span>
-
-          <motion.span
-            animate={{
-              y: [0, 5, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="text-[#EB2226]"
-          >
-            ↓
-          </motion.span>
-        </motion.div>
-
-      </div>
 
       {/* =====================================================
           VIDEO SECTION – FULL WIDTH NOW

@@ -12,13 +12,24 @@ const PILLARS = [
   {
     id: "film",
     kicker: "Supported By",
-    word: "Film",
+    // word: "Film",
+    word: "Videos",
+
+
+    // grayText:
+    //   "We make films that look good, and say something too. From cinematic brand stories to product films and campaign content, our work blends strategy with style.",
 
     grayText:
-      "We make films that look good, and say something too. From cinematic brand stories to product films and campaign content, our work blends strategy with style.",
+      "We don’t just create content. We create connections that make brands unforgettable. From brand films to AI-led stories, every frame is crafted to move hearts, inspire trust and make your brand remembered.",
 
-    blueText:
-      "Whether it's live-action or motion-led, every frame is crafted to connect, not just decorate. We write, direct, shoot and edit films that help brands speak with clarity, and actually get remembered.",
+
+
+    // blueText:
+    //   "Whether it's live-action or motion-led, every frame is crafted to connect, not just decorate. We write, direct, shoot and edit films that help brands speak with clarity, and actually get remembered.",
+
+ blueText:
+      "Because your story deserves to be felt, not just seen.",
+
 
     images: [
       "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1800&q=90",

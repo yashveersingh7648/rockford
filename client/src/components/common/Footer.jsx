@@ -1,5 +1,13 @@
 import { motion } from "framer-motion";
 
+import {
+  FaYoutube,
+  FaInstagram,
+  FaLinkedinIn,
+  FaFacebookF,
+  FaWhatsapp,
+} from "react-icons/fa";
+
 const NAVIGATION = [
   { label: "Home", href: "#top" },
   { label: "Work", href: "#design" },
@@ -8,11 +16,21 @@ const NAVIGATION = [
   { label: "Systems", href: "#systems" },
 ];
 
+// const SOCIALS = [
+//   { label: "YouTube", href: "https://youtube.com/@roakfieldbusinessconsultants?si=nDFXioZsiRzO4jJh" },
+//   { label: "Instagram", href: "https://www.instagram.com/roakfield?utm_source=qr&dlrf=MXI1enAydDh5bGdwZA==" },
+//   { label: "LinkedIn", href: "#" },
+//   { label: "facebook", href: "https://www.facebook.com/share/1C4y45iSHV/" },
+// ];
+
 const SOCIALS = [
-  { label: "YouTube", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
+  { label: "YouTube", Icon: FaYoutube, href: "https://youtube.com/@roakfieldbusinessconsultants?si=nDFXioZsiRzO4jJh" },
+  { label: "Instagram", Icon: FaInstagram, href: "https://www.instagram.com/roakfield?utm_source=qr&dlrf=MXI1enAydDh5bGdwZA==" },
+  { label: "LinkedIn", Icon: FaLinkedinIn, href: "" }, // client se URL lekar yahan bharo
+  { label: "Facebook", Icon: FaFacebookF, href: "https://www.facebook.com/share/1C4y45iSHV/" },
+  { label: "WhatsApp", Icon: FaWhatsapp, href: "https://wa.me/919718049057" },
 ];
+
 
 const SERVICES = [
   "Advisory",
@@ -27,7 +45,8 @@ const SERVICES = [
 export function Footer() {
   return (
     <footer
-      id="contact"
+      // id="contact"
+            id="lets-connect"
       className="
         relative
         overflow-hidden
@@ -65,7 +84,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[0.2fr_1fr]">
           {/* Label */}
           <div>
-            <span className="text-[9px] uppercase tracking-[0.16em] text-white/35">
+            <span className="text-[12px] uppercase text-white">
               Let's talk
             </span>
           </div>
@@ -97,7 +116,10 @@ export function Footer() {
             </p>
 
             <a
-              href="mailto:hello@roakfield.com"
+              // href="mailto:hello@roakfield.com"
+
+              href="mailto:consult@roakfield.com"
+
               className="
                 group
                 mt-8
@@ -115,12 +137,33 @@ export function Footer() {
                 hover:text-[#EB2226]
               "
             >
-              hello@roakfield.com
+              consult@roakfield.com
 
               <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
                 ↗
               </span>
             </a>
+            <a
+              href="https://wa.me/919718049057"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                mt-4
+                flex
+                w-fit
+                items-center
+                gap-2
+                text-sm
+                text-white
+                transition-colors
+                duration-300
+                hover:text-[#EB2226]
+              "
+            >
+              <FaWhatsapp className="h-4 w-4" />
+              +91-9718049057
+            </a>
+
           </motion.div>
         </div>
 
@@ -143,11 +186,11 @@ export function Footer() {
         >
           {/* Studio */}
           <div>
-            <span className="mb-4 block text-[9px] uppercase tracking-[0.16em] text-white/35">
+            <span className="mb-4 block text-[12px] uppercase tracking-[0.16em] text-white">
               Studio
             </span>
 
-            <p className="max-w-[220px] text-xs leading-[1.7] text-white/55">
+            <p className="max-w-[220px] text-xs leading-[1.7] text-white">
               Roakfield
               <br />
               India
@@ -158,7 +201,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <span className="mb-4 block text-[9px] uppercase tracking-[0.16em] text-white/35">
+            <span className="mb-4 block text-[12px] uppercase tracking-[0.16em] text-white">
               Services
             </span>
 
@@ -166,7 +209,7 @@ export function Footer() {
               {SERVICES.map((service, index) => (
                 <span
                   key={service}
-                  className="text-xs text-white/55"
+                  className="text-xs text-white"
                 >
                   {service}
                   {index < SERVICES.length - 1 && (
@@ -179,7 +222,7 @@ export function Footer() {
 
           {/* Sitemap */}
           <div>
-            <span className="mb-4 block text-[9px] uppercase tracking-[0.16em] text-white/35">
+            <span className="mb-4 block text-[12px] uppercase tracking-[0.16em] text-white">
               Sitemap
             </span>
 
@@ -195,7 +238,7 @@ export function Footer() {
                     items-center
                     gap-1
                     text-xs
-                    text-white/55
+                    text-white
                     transition-colors
                     duration-300
                     hover:text-[#EB2226]
@@ -213,12 +256,12 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <span className="mb-4 block text-[9px] uppercase tracking-[0.16em] text-white/35">
+            <span className="mb-4 block text-[12px] uppercase tracking-[0.16em] text-white">
               Connect
             </span>
 
             <div className="flex flex-col gap-1.5">
-              {SOCIALS.map((social) => (
+              {/* {SOCIALS.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
@@ -229,7 +272,7 @@ export function Footer() {
                     items-center
                     gap-1
                     text-xs
-                    text-white/55
+                    text-white
                     transition-colors
                     duration-300
                     hover:text-[#EB2226]
@@ -241,7 +284,39 @@ export function Footer() {
                     ↗
                   </span>
                 </a>
-              ))}
+              ))} */}
+              {SOCIALS.filter((s) => s.href && s.href !== "#").map(
+                ({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="
+                      group
+                      flex
+                      w-fit
+                      items-center
+                      gap-2
+                      text-xs
+                      text-white
+                      transition-colors
+                      duration-300
+                      hover:text-[#EB2226]
+                    "
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+
+                    {label}
+
+                    <span className="opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
+                      ↗
+                    </span>
+                  </a>
+                )
+              )}
+
             </div>
           </div>
         </div>
@@ -258,10 +333,10 @@ export function Footer() {
             border-t
             border-white/10
             pt-5
-            text-[8px]
+            text-[9px]
             uppercase
             tracking-[0.14em]
-            text-white/30
+            text-white
             md:flex-row
             md:items-center
             md:justify-between

@@ -21,25 +21,25 @@ export function Play() {
   return (
     <section
       id="play"
-      className="
-        relative
-        overflow-hidden
-        border-t
-        border-[#A7A9AC]/30
-        bg-white
-        px-5
-        py-16
-        md:px-10
-        md:py-24
-        lg:px-12
-        lg:py-28
-      "
+      // className="
+      //   relative
+      //   overflow-hidden
+      //   border-t
+      //   border-[#A7A9AC]/30
+      //   bg-white
+      //   px-5
+      //   py-16
+      //   md:px-10
+      //   md:py-24
+      //   lg:px-12
+      //   lg:py-28
+      // "
     >
       {/* =====================================================
           TOP META
       ===================================================== */}
 
-      <div className="mb-10 flex items-center justify-between md:mb-14">
+      {/* <div className="mb-10 flex items-center justify-between md:mb-14">
         <Reveal>
           <div className="flex items-center gap-3">
             <span
@@ -80,10 +80,7 @@ export function Play() {
         </Reveal>
       </div>
 
-      {/* =====================================================
-          CINEMATIC MEDIA
-      ===================================================== */}
-
+     
       <Reveal>
         <div
           className="
@@ -93,7 +90,7 @@ export function Play() {
             bg-[#01295C]
           "
         >
-          {/* RED TOP ACCENT */}
+          
 
           <div
             className="
@@ -107,7 +104,7 @@ export function Play() {
             "
           />
 
-          {/* IMAGE */}
+         
 
           <motion.div
             className="
@@ -142,7 +139,7 @@ export function Play() {
               "
             />
 
-            {/* BLUE BRAND TREATMENT */}
+            
 
             <div
               className="
@@ -156,7 +153,7 @@ export function Play() {
               "
             />
 
-            {/* CINEMATIC GRADIENT */}
+            
 
             <div
               className="
@@ -170,9 +167,7 @@ export function Play() {
               "
             />
 
-            {/* =================================================
-                FRAME
-            ================================================= */}
+           
 
             <div
               className="
@@ -191,9 +186,7 @@ export function Play() {
               "
             />
 
-            {/* =================================================
-                TOP LEFT
-            ================================================= */}
+            
 
             <div
               className="
@@ -216,9 +209,7 @@ export function Play() {
               Roakfield / Film
             </div>
 
-            {/* =================================================
-                PLAY BUTTON
-            ================================================= */}
+        
 
             <motion.div
               className="
@@ -272,7 +263,6 @@ export function Play() {
                 </span>
               </motion.div>
 
-              {/* OUTER RING */}
 
               <motion.div
                 className="
@@ -297,9 +287,7 @@ export function Play() {
               />
             </motion.div>
 
-            {/* =================================================
-                BOTTOM INFO
-            ================================================= */}
+            
 
             <div
               className="
@@ -368,9 +356,7 @@ export function Play() {
         </div>
       </Reveal>
 
-      {/* =====================================================
-          CONTENT BELOW MEDIA
-      ===================================================== */}
+      
 
       <div
         className="
@@ -383,9 +369,7 @@ export function Play() {
           lg:grid-cols-[0.72fr_1.28fr]
         "
       >
-        {/* ===================================================
-            LEFT
-        =================================================== */}
+        
 
         <Reveal>
           <div>
@@ -425,9 +409,7 @@ export function Play() {
           </div>
         </Reveal>
 
-        {/* ===================================================
-            RIGHT
-        =================================================== */}
+        
 
         <Reveal delay={0.1}>
           <div className="max-w-3xl">
@@ -446,7 +428,7 @@ export function Play() {
               project.
             </p>
 
-            {/* RED ACCENT */}
+           
 
             <div
               className="
@@ -458,7 +440,7 @@ export function Play() {
               "
             />
 
-            {/* LINK */}
+            
 
             <motion.a
               href="#work"
@@ -502,9 +484,7 @@ export function Play() {
         </Reveal>
       </div>
 
-      {/* =====================================================
-          BOTTOM INDEX
-      ===================================================== */}
+      
 
       <div
         className="
@@ -525,7 +505,7 @@ export function Play() {
         <span>Roakfield / Play</span>
 
         <span>Film · Strategy · Design</span>
-      </div>
+      </div> */}
     </section>
   );
 }
@@ -1360,9 +1340,9 @@ export function Systems() {
       id="systems"
       className="border-t border-gray-200 bg-white"
     >
-      <Reveal>
+      {/* <Reveal>
         <div className="relative overflow-hidden">
-          {/* Red top bar */}
+          
 
           <div className="absolute left-0 top-0 z-10 h-1 w-full bg-[#EB2226]" />
 
@@ -1415,7 +1395,7 @@ export function Systems() {
             </span>
           </motion.a>
         </Reveal>
-      </div>
+      </div> */}
     </section>
   );
 }
