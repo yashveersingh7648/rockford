@@ -1746,7 +1746,6 @@ export default function Works() {
 
           md:grid-cols-2
           md:gap-y-3
-
           lg:gap-x-12
           lg:gap-y-4
         "
