@@ -36,6 +36,12 @@ const WORKS = [
           "Images/Branding - 5.png",
  "Images/Branding - 6.png",
       "Images/Branding - 7.png",
+
+      "Images/productbrand01.jpg",
+      "Images/productbrand02.jpg",
+      // "Images/productbrand03.jpg",
+      "Images/productbrand04.jpg",
+      "Images/productbrand05.jpg",
     ],
 
     outcome:
@@ -61,12 +67,17 @@ const WORKS = [
      "Images/Branding - 9.png",
 
     images: [
-         "Images/Branding - 10.png",
- "Images/Branding - 11.png",
+      "Images/Branding - 10.png",
+      "Images/Branding - 11.png",
       "Images/Branding - 12.png",
+      "Images/Branding - 13.png",
+      "Images/Branding - 14.png",
 
-          "Images/Branding - 13.png",
- "Images/Branding - 14.png",
+      "Images/PersonalBranding02.jpg",
+      "Images/PersonalBranding03.jpg",
+      "Images/PersonalBranding04.png",
+      "Images/PersonalBranding01.jpg",
+      "Images/PersonalBranding05.jpg",
      
     ],
 
@@ -98,6 +109,12 @@ const WORKS = [
       "Images/socil4.jpg",
       "Images/socil5.jpg",
       "Images/socil6.jpg",
+
+      "Images/SocialCurrency01.jpg",
+      "Images/SocialCurrency02.jpg",
+      "Images/SocialCurrency03.jpg",
+      "Images/SocialCurrency04.jpg",
+      "Images/SocialCurrency05.jpg",
     ],
 
     outcome:
@@ -128,7 +145,7 @@ const WORKS = [
       "Images/CS - 6.png",
       "Images/CS - 7.png",
       "Images/CS - 8.png",
-      "Images/CS - 9.png",
+      "Images/CS - 3.png",
 
        "Images/CS - 10.png",
       "Images/CS - 11.png",
@@ -166,6 +183,14 @@ const WORKS = [
       "Images/sop5.jpg",
       "Images/sop6.jpg",
       // "Images/sop5.jpg",
+
+      "Images/SOP01.jpg",
+      "Images/SOP02.jpg",
+      "Images/SOP03.jpg",
+      "Images/SOP04.jpg",
+      "Images/SOP05.jpg",
+      "Images/SOP06.jpg",
+      
     ],
 
     outcome:
@@ -198,6 +223,13 @@ const WORKS = [
       "Images/CustomerExperience5.jpg",
       "Images/CustomerExperience6.jpg",
       "Images/CustomerExperience7.jpg",
+
+      "Images/CustomerExperience01.jpg",
+      "Images/CustomerExperience03.jpg",
+      "Images/CustomerExperience04.jpg",
+      "Images/CustomerExperience02.jpg",
+
+      "Images/CustomerExperience05.jpg",
     ],
 
     outcome:
@@ -225,7 +257,7 @@ const WORKS = [
     images: [
       "Images/GTM - 3.png",
       "Images/GTM - 4.png",
-      "Images/GTM - 5.png",
+      "Images/GTM - 2.png",
       "Images/GTM - 6.png",
       "Images/GTM - 7.png",
       "Images/GTM - 8.png",
@@ -263,6 +295,14 @@ const WORKS = [
       "Images/TalentManagement4.jpg",
       "Images/TalentManagement5.jpg",
      
+      "Images/talentmanagement01.jpg",
+      "Images/talentmanagement02.jpg",
+      "Images/talentmanagement03.jpg",
+      "Images/talentmanagement04.jpg",
+      "Images/talentmanagement05.jpg",
+      "Images/talentmanagement06.jpg",
+      "Images/talentmanagement07.jpg",
+
     ],
 
     outcome:
@@ -292,6 +332,13 @@ const WORKS = [
       "Images/PerformanceMarketing4.jpg",
       "Images/PerformanceMarketing5.jpg",
       "Images/PerformanceMarketing6.jpg",
+
+      "Images/performancemarketing01.jpg",
+      "Images/performancemarketing02.png",
+      "Images/performancemarketing03.jpg",
+      "Images/performancemarketing04.jpg",
+      "Images/performancemarketing05.png",
+      "Images/performancemarketing06.jpg",
     ],
 
     outcome:
