@@ -889,7 +889,7 @@ const HERO_CARDS = [
       "Images/Bharat - Streetfood.png",
       "Images/Bharat - TamilNadu.png",
 
-      "Images/Bharat - TeaGarden.png",
+      // "Images/Bharat - TeaGarden.png",
       "Images/Bharat - VandeBharat.png",
       "Images/Bharat - WorliSeLink.png",
     ],
