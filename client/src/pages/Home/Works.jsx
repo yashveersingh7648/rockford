@@ -12,6 +12,7 @@ const WORKS = [
   {
     number: "01",
     title: "Product Branding",
+    
     subtitle:
       "Roakfield will define your product’s positioning, identity and value proposition to help it stand out in a competitive market.",
     tags: ["Identity", "Positioning", "Value Proposition"],
@@ -1350,9 +1351,11 @@ function WorkCard({ work, index }) {
 
   return (
     <article
+      id={`work-${work.number}`}
       ref={cardRef}
       className={`
         relative
+        scroll-mt-24
         opacity-0
         ${index % 2 === 1 ? "md:mt-24" : ""}
       `}

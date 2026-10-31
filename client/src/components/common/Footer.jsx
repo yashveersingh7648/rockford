@@ -32,17 +32,37 @@ const SOCIALS = [
 ];
 
 
+// const SERVICES = [
+//   "Advisory",
+//   "Personal Branding",
+//   "Brand Building",
+//   "GTM Strategy",
+//   "Content",
+//   "Performance Marketing",
+//   "Sales Strategy",
+// ];
+
 const SERVICES = [
-  "Advisory",
-  "Personal Branding",
-  "Brand Building",
-  "GTM Strategy",
-  "Content",
-  "Performance Marketing",
-  "Sales Strategy",
+  { label: "Advisory", target: "lets-connect" },
+  { label: "Personal Branding", target: "work-02" },
+  { label: "Brand Building", target: "work-01" },
+  { label: "GTM Strategy", target: "work-07" },
+  { label: "Content", target: "work-04" },
+  { label: "Performance Marketing", target: "work-09" },
+  { label: "Sales Strategy", target: "work-07" },
 ];
 
 export function Footer() {
+
+
+  const goTo = (id) => {
+    const el = document.getElementById(id);
+
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <footer
       // id="contact"
@@ -206,12 +226,19 @@ export function Footer() {
             </span>
 
             <div className="flex max-w-[260px] flex-wrap gap-x-2 gap-y-1">
-              {SERVICES.map((service, index) => (
+                            {SERVICES.map((service, index) => (
                 <span
-                  key={service}
+                  key={service.label}
                   className="text-xs text-white"
                 >
-                  {service}
+                  <button
+                    type="button"
+                    onClick={() => goTo(service.target)}
+                    className="cursor-pointer transition-colors duration-300 hover:text-[#EB2226]"
+                  >
+                    {service.label}
+                  </button>
+
                   {index < SERVICES.length - 1 && (
                     <span className="ml-2 text-[#EB2226]">·</span>
                   )}
